@@ -1,8 +1,8 @@
 class WeatherModel {
   String date;
-  String temp;
-  String minTemp;
-  String maxTemp;
+  double temp;
+  double minTemp;
+  double maxTemp;
   String weatherStatement;
 
   WeatherModel({
@@ -24,11 +24,13 @@ class WeatherModel {
       weatherStatement: jsonData['condition']['text'],
     );
   }
+
   @override
   String toString() {
     return 'Temp = $temp Min Temp = $minTemp Max Temp = $maxTemp Date = $date';
   }
 }
+
 
 /* 
 class WeatherModel {
