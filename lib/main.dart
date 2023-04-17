@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/providers/weather_provider.dart';
 
 void main(List<String> args) {
-  runApp(const Main());
+  runApp(Main());
 }
 
 class Main extends StatelessWidget {
-  const Main({Key? key}) : super(key: key);
+  Main({Key? key}) : super(key: key);
+  WeatherModel? weather;
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return ChangeNotifierProvider(
+      create: (context) {
+        return WeatherProvider();
+      },
+      child: MaterialApp(
+        theme: ThemeData(
+            primaryColor: Provider.of<WeatherProvider>(context)
+                .weatherData!
+                .getThemeColor()),
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
     );
   }
 }

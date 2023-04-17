@@ -3,6 +3,29 @@ import 'package:http/http.dart' as http;
 import 'package:weather_app/models/weather_model.dart';
 
 class WeatherService {
+  final String _baseURL = "http://api.weatherapi.com/v1";
+  final String _key = "19d5d22e92c14b7491871624230804";
+
+  Future<WeatherModel> getWeather({required String cityName}) async {
+    final url =
+        Uri.parse("$_baseURL/forecast.json?key=$_key&q=$cityName&days=7");
+    final response = await http.get(url);
+
+    if (response.statusCode != 200) {
+      throw Exception("Failed to get weather data");
+    }
+
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    late final WeatherModel weatherModel;
+    weatherModel = WeatherModel.fromJson(data);
+    return weatherModel;
+  }
+}
+/* import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:weather_app/models/weather_model.dart';
+
+class WeatherService {
   String baseURL = "http://api.weatherapi.com/v1";
   String key = "19d5d22e92c14b7491871624230804";
   Future<WeatherModel>  getWeather({required String cityName}) async {
@@ -13,32 +36,5 @@ class WeatherService {
     return weatherModel;
   }
 }
+ */
 
-
-/* import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:weather_app/models/weather_model.dart';
-
-class WeatherService {
-  static const String baseURL = "https://api.weatherapi.com/v1";
-  static const String apiKey = "19d5d22e92c14b7491871624230804";
-
-  Future<WeatherModel> getWeather(
-      {required String cityName, int days = 7}) async {
-    final uri = Uri.https(
-      baseURL,
-      '/forecast.json?',
-      {'key': apiKey, 'q': cityName, 'days': days.toString()},
-    );
-
-    final response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      final weatherModel = WeatherModel.fromJson(data);
-      return weatherModel;
-    } else {
-      throw Exception('Failed to fetch weather data');
-    }
-  }
-} */
