@@ -26,7 +26,7 @@ class Main extends StatelessWidget {
                 .getThemeColor(),
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

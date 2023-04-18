@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SearchPage();
+                    return const SearchPage();
                   },
                 ),
               );
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Spacer(
+                  const Spacer(
                     flex: 3,
                   ),
                   Text(
@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
